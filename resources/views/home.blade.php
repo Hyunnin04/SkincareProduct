@@ -37,23 +37,9 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
             <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-                <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
+                <img src="https://www.thebeautysalon.ie/wp-content/uploads/2021/05/imagemain.jpg" alt="" width="1000px" height="800px">
             </div>
-            <div class="flex items-center justify-between pt-6">
-            <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
-            </div>
-            <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-            <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
-            </div>
-            <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-            <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
-            </div>
-            <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-            <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
-            </div>
-            <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-            <img src="https://i.pinimg.com/564x/7b/88/0b/7b880b69c9524bd94030f5409a4a622a.jpg" alt="" width="200px" height="200px">
-            </div>
+            
         </div>
     </div>
 </main>

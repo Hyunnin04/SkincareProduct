@@ -1,9 +1,9 @@
 <?php
- 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
- 
+
 return new class extends Migration
 {
     /**
@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('price');
-            $table->string('product_code');
-            $table->text('description');
+            $table->string('name');
+            $table->text('detail');
+            $table->string('image');
             $table->timestamps();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      */

@@ -1,81 +1,122 @@
 <?php
- 
+  
 namespace App\Http\Controllers;
- 
-use Illuminate\Http\Request;
+  
 use App\Models\Product;
- 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
+  
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return response()
      */
-    public function index()
+    public function index(): View
     {
-        $product = Product::orderBy('created_at', 'DESC')->get();
- 
-        return view('products.index', compact('product'));
+        $products = Product::latest()->paginate(5);
+        
+        return view('products.index',compact('products'))
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
- 
+  
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('products.create');
     }
- 
+  
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        Product::create($request->all());
- 
-        return redirect()->route('admin/products')->with('success', 'Product added successfully');
+        $request->validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $input = $request->all();
+    
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+      
+        Product::create($input);
+       
+        return redirect()->route('products.index')
+                        ->with('success','Product created successfully.');
     }
- 
+  
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product): View
     {
-        $product = Product::findOrFail($id);
- 
-        return view('products.show', compact('product'));
+        return view('products.show',compact('product'));
     }
- 
+  
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product): View
     {
-        $product = Product::findOrFail($id);
- 
-        return view('products.edit', compact('product'));
+        return view('products.edit',compact('product'));
     }
- 
+  
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        $product = Product::findOrFail($id);
- 
-        $product->update($request->all());
- 
-        return redirect()->route('admin/products')->with('success', 'product updated successfully');
+        $request->validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $input = $request->all();
+    
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }else{
+            unset($input['image']);
+        }
+            
+        $product->update($input);
+      
+        return redirect()->route('products.index')
+                        ->with('success','Product updated successfully');
     }
- 
+  
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product): RedirectResponse
     {
-        $product = Product::findOrFail($id);
- 
         $product->delete();
- 
-        return redirect()->route('admin/products')->with('success', 'product deleted successfully');
+         
+        return redirect()->route('products.index')
+                        ->with('success','Product deleted successfully');
+    }
+    
+
+    public function products()
+    {
+        $products = Product::all();
+
+        return view('products.index', compact('products'));
     }
 }

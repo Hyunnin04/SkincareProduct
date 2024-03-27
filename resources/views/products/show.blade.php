@@ -1,38 +1,56 @@
-@extends('layouts.app')
- 
-@section('title', 'Show Product')
- 
-@section('contents')
-<h1 class="font-bold text-2xl ml-3">Detail Product</h1>
-<hr />
-<div class="border-b border-gray-900/10 pb-12">
-    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-            <label class="block text-sm font-medium leading-6 text-gray-900">Title</label>
-            <div class="mt-2">
-                {{ $product->title }}
+@extends('products.layout')
+@section('content')
+<style>
+    .btn-primary{
+        background-color: #5c91f0;
+        color: pink;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    h2{
+        text-align: center;
+        justify-self: center;
+        background-color: #5c91f0;
+        color: pink;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .form-group{
+        display: flex;
+        color: #5c91f0;
+        font-size:20px;
+        justify-content: center;
+    }
+</style>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2> Show Product</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
             </div>
         </div>
- 
-        <div class="sm:col-span-4">
-            <label class="block text-sm font-medium leading-6 text-gray-900">Price</label>
-            <div class="mt-2">
-                {{ $product->price }}
-            </div>
-        </div>
-        <div class="sm:col-span-4">
-            <label class="block text-sm font-medium leading-6 text-gray-900">Product Code</label>
-            <div class="mt-2">
-                {{ $product->product_code }}
-            </div>
-        </div>
-        <div class="sm:col-span-4">
-            <label class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-            <div class="mt-2">
-                {{ $product->description }}
-            </div>
-        </div>
-        </form>
     </div>
-</div>
+     
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                {{ $product->name }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Details:</strong>
+                {{ $product->detail }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Image:</strong>
+                <img src="/images/{{ $product->image }}" width="500px">
+            </div>
+        </div>
+    </div>
 @endsection

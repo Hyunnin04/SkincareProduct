@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
  
-Route::get('/about', [UserController::class, 'about'])->name('about');
+Route::get('/products', [ProductController::class, 'products'])->name('products.index');
  
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
@@ -53,3 +53,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::put('/admin/products/edit/{id}', [ProductController::class, 'update'])->name('admin/products/update');
     Route::delete('/admin/products/destroy/{id}', [ProductController::class, 'destroy'])->name('admin/products/destroy');
 });
+Route::resource('products', ProductController::class);
+// web.php or routes/web.php
+
+// Route::get('/products', function () {
+//     // Your logic for the products page
+//     return view('products.index');
+// })->name('products');

@@ -13,8 +13,8 @@ class UserController extends Controller
         return view('userprofile');
     }
  
-    public function about()
+    public function products()
     {
-        return view('about');
+        return view('products.index');
     }
 }
